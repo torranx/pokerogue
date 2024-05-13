@@ -27,6 +27,12 @@ body {
   justify-content: center;
 }
 
+@media screen and (orientation: landscape) {
+  #app {
+    align-items: center;
+  }
+}
+
 #app > div:first-child {
   transform-origin: top !important;
 }
