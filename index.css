@@ -27,7 +27,7 @@ body {
   justify-content: center;
 }
 
-@media screen and (orientation: landscape) {
+@media (orientation: landscape) {
   #app {
     align-items: center;
   }
