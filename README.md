@@ -68,6 +68,7 @@ Check out [Github Issues](https://github.com/pagefaultgames/pokerogue/issues) to
 ### 🎨 UI
   - GAMEFREAK
   - LJ Birdman
+  - Odizinne (Custom cursor)
 
 ### 🎨 Pagefault Games Intro
   - Spectremint
