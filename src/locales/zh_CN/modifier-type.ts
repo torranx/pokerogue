@@ -17,7 +17,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
       }
     },
     "PokemonHpRestoreModifierType": {
-      description: "为一只宝可梦回复 {{restorePoints}} HP 或 {{restorePercent}}% HP，取最大值",
+      description: "为一只宝可梦回复 {{restorePoints}} HP 或 {{restorePercent}}% HP，取较大值",
       extra: {
         "fully": "为一只宝可梦回复全部HP",
         "fullyWithStatus": "为一只宝可梦回复全部HP并消除所有负面\n状态",
@@ -139,10 +139,10 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "HYPER_POTION": { name: "厉害伤药" },
     "MAX_POTION": { name: "全满药" },
     "FULL_RESTORE": { name: "全复药" },
-    
+
     "REVIVE": { name: "活力碎片" },
     "MAX_REVIVE": { name: "活力块" },
-    
+
     "FULL_HEAL": { name: "万灵药" },
 
     "SACRED_ASH": { name: "圣灰" },
@@ -187,18 +187,18 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "AMULET_COIN": { name: "护符金币", description: "金钱奖励增加20%" },
     "GOLDEN_PUNCH": { name: "黄金拳头", description: "将50%造成的伤害转换为金钱" },
     "COIN_CASE": { name: "代币盒", description: "每十场战斗, 获得自己金钱10%的利息" },
-    
+
     "LOCK_CAPSULE": { name: "上锁的容器", description: "允许在刷新物品时锁定物品稀有度" },
 
     "GRIP_CLAW": { name: "紧缠钩爪" },
     "WIDE_LENS": { name: "广角镜" },
-    
+
     "MULTI_LENS": { name: "多重镜" },
 
     "HEALING_CHARM": { name: "治愈护符", description: "HP回复量增加10% (含复活)" },
-    "CANDY_JAR": { name: "糖果罐", description: "神奇糖果提供的升级提升1级" },
+    "CANDY_JAR": { name: "糖果罐", description: "神奇糖果提供的升级额外增加1级" },
 
-    "BERRY_POUCH": { name: "树果袋", description: "使用树果时有25%的几率不会消耗树果" },
+    "BERRY_POUCH": { name: "树果袋", description: "使用树果时有30%的几率不会消耗树果" },
 
     "FOCUS_BAND": { name: "气势头带", description: "携带该道具的宝可梦有10%几率在受到\n攻击而将陷入濒死状态时，保留1点HP不陷入濒死状态" },
 
@@ -209,12 +209,15 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "LEFTOVERS": { name: "吃剩的东西", description: "携带该道具的宝可梦在每个回合结束时恢复\n最大HP的1/16" },
     "SHELL_BELL": { name: "贝壳之铃", description: "携带该道具的宝可梦在攻击对方成功造成伤\n害时，携带者的HP会恢复其所造成伤害\n的1/8" },
 
+    "TOXIC_ORB": { name: "Toxic Orb", description: "It's a bizarre orb that exudes toxins when touched and will badly poison the holder during battle" },
+    "FLAME_ORB": { name: "Flame Orb", description: "It's a bizarre orb that gives off heat when touched and will affect the holder with a burn during battle" },
+
     "BATON": { name: "接力棒", description: "允许在切换宝可梦时保留能力变化, 对陷阱\n同样生效" },
 
     "SHINY_CHARM": { name: "闪耀护符", description: "显著增加野生宝可梦的闪光概率" },
     "ABILITY_CHARM": { name: "特性护符", description: "显著增加野生宝可梦有隐藏特性的概率" },
 
-    "IV_SCANNER": { name: "个体值探测器", description: "允许扫描野生宝可梦的个体值。 每个次显示\n2个个体值. 最好的个体值优先显示" },
+    "IV_SCANNER": { name: "个体值探测器", description: "允许扫描野生宝可梦的个体值。可叠加，每多拥有一个多显示\n2项个体值. 最好的个体值优先显示" },
 
     "DNA_SPLICERS": { name: "基因之楔" },
 
@@ -227,10 +230,8 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "ENEMY_HEAL": { name: "回复硬币", description: "每回合回复2%最大HP" },
     "ENEMY_ATTACK_POISON_CHANCE": { name: "剧毒硬币" },
     "ENEMY_ATTACK_PARALYZE_CHANCE": { name: "麻痹硬币" },
-    "ENEMY_ATTACK_SLEEP_CHANCE": { name: "睡眠硬币" },
-    "ENEMY_ATTACK_FREEZE_CHANCE": { name: "冰冻硬币" },
     "ENEMY_ATTACK_BURN_CHANCE": { name: "灼烧硬币" },
-    "ENEMY_STATUS_EFFECT_HEAL_CHANCE": { name: "万灵药硬币", description: "增加10%每回合治愈异常状态的概率" },
+    "ENEMY_STATUS_EFFECT_HEAL_CHANCE": { name: "万灵药硬币", description: "增加2.5%每回合治愈异常状态的概率" },
     "ENEMY_ENDURE_CHANCE": { name: "忍受硬币" },
     "ENEMY_FUSED_CHANCE": { name: "融合硬币", description: "增加1%野生融合宝可梦出现概率" },
   },
@@ -290,7 +291,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "TART_APPLE": "酸酸苹果",
     "STRAWBERRY_SWEET": "草莓糖饰",
     "UNREMARKABLE_TEACUP": "凡作茶碗",
-  
+
     "CHIPPED_POT": "缺损的茶壶",
     "BLACK_AUGURITE": "黑奇石",
     "GALARICA_CUFF": "伽勒豆蔻手环",
@@ -362,7 +363,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "HARD_METEORITE": "坚硬陨石",
     "SMOOTH_METEORITE": "光滑陨石",
     "ADAMANT_CRYSTAL": "大金刚宝玉",
-    "LUSTROUS_ORB": "白玉宝珠",
+    "LUSTROUS_GLOBE": "大白宝玉",
     "GRISEOUS_CORE": "大白金宝玉",
     "REVEAL_GLASS": "现形镜",
     "GRACIDEA": "葛拉西蒂亚花",

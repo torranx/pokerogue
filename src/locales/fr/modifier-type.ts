@@ -139,13 +139,13 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "HYPER_POTION": { name: "Hyper Potion" },
     "MAX_POTION": { name: "Potion Max" },
     "FULL_RESTORE": { name: "Guérison" },
-    
+
     "REVIVE": { name: "Rappel" },
     "MAX_REVIVE": { name: "Rappel Max" },
-    
+
     "FULL_HEAL": { name: "Total Soin" },
 
-    "SACRED_ASH": { name: "Cendres Sacrées" },
+    "SACRED_ASH": { name: "Cendre Sacrée" },
 
     "REVIVER_SEED": { name: "Résugraine", description: "Réanime et restaure la moitié des PV de son porteur s’il tombe K.O." },
 
@@ -187,18 +187,18 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "AMULET_COIN": { name: "Pièce Rune", description: "Augmente de 20% les gains d’argent" },
     "GOLDEN_PUNCH": { name: "Poing Doré", description: "50% des dégâts infligés sont convertis en argent" },
     "COIN_CASE": { name: "Boite Jetons", description: "Tous les 10 combats, recevez 10% de votre argent en intérêts" },
-    
+
     "LOCK_CAPSULE": { name: "Poké Écrin", description: "Permet de verrouiller des objets rares si vous relancez les objets proposés" },
 
     "GRIP_CLAW": { name: "Accro Griffe" },
     "WIDE_LENS": { name: "Loupe" },
-    
-    "MULTI_LENS": { name: "Multi Loupe" },
+
+    "MULTI_LENS": { name: "Lentille Multi" },
 
     "HEALING_CHARM": { name: "Charme Soin", description: "Augmente de 10% l’efficacité des capacités et objets de soin de PV (hors Rappels)" },
-    "CANDY_JAR": { name: "Jarre de Bonbons", description: "Augmente de 1 le nombre de niveaux gagnés à l’utilisation d’un Super Bonbon" },
+    "CANDY_JAR": { name: "Bonbonnière", description: "Augmente de 1 le nombre de niveaux gagnés à l’utilisation d’un Super Bonbon" },
 
-    "BERRY_POUCH": { name: "Sac à Baies", description: "Ajoute 25% de chances qu’une Baie utilisée ne soit pas consommée" },
+    "BERRY_POUCH": { name: "Sac à Baies", description: "Ajoute 30% de chances qu’une Baie utilisée ne soit pas consommée" },
 
     "FOCUS_BAND": { name: "Bandeau", description: "Ajoute 10% de chances de survivre avec 1 PV si les dégâts reçus pouvaient mettre K.O." },
 
@@ -209,12 +209,15 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "LEFTOVERS": { name: "Restes", description: "Soigne à chaque tour 1/16 des PV max d’un Pokémon" },
     "SHELL_BELL": { name: "Grelot Coque", description: "Soigne 1/8 des dégâts infligés par un Pokémon" },
 
+    "TOXIC_ORB": { name: "Orbe Toxique", description: "Un orbe bizarre qui empoisonne gravement son porteur durant le combat" },
+    "FLAME_ORB": { name: "Orbe Flamme", description: "Un orbe bizarre qui brûle son porteur durant le combat" },
+
     "BATON": { name: "Bâton", description: "Permet de transmettre les effets en cas de changement de Pokémon. Ignore les pièges." },
 
     "SHINY_CHARM": { name: "Charme Chroma", description: "Augmente énormément les chances de rencontrer un Pokémon sauvage chromatique" },
     "ABILITY_CHARM": { name: "Charme Talent", description: "Augmente énormément les chances de rencontrer un Pokémon sauvage avec un Talent Caché" },
 
-	"IV_SCANNER": { name: "Scanner d’IV", description: "Révèle la qualité de deux IV d’un Pokémon sauvage par scanner possédé. Les meilleurs IV sont révélés en priorité." },
+    "IV_SCANNER": { name: "Scanner d’IV", description: "Révèle la qualité de deux IV d’un Pokémon sauvage par scanner possédé. Les meilleurs IV sont révélés en priorité." },
 
     "DNA_SPLICERS": { name: "Pointeau ADN" },
 
@@ -227,10 +230,8 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "ENEMY_HEAL": { name: "Jeton Soin", description: "Soigne 2% des PV max à chaque tour" },
     "ENEMY_ATTACK_POISON_CHANCE": { name: "Jeton Poison" },
     "ENEMY_ATTACK_PARALYZE_CHANCE": { name: "Jeton Paralysie" },
-    "ENEMY_ATTACK_SLEEP_CHANCE": { name: "Jeton Sommeil" },
-    "ENEMY_ATTACK_FREEZE_CHANCE": { name: "Jeton Gel" },
     "ENEMY_ATTACK_BURN_CHANCE": { name: "Jeton Brulure" },
-    "ENEMY_STATUS_EFFECT_HEAL_CHANCE": { name: "Jeton Total Soin", description: "Ajoute 10% de chances à chaque tour de se soigner d’un problème de statut." },
+    "ENEMY_STATUS_EFFECT_HEAL_CHANCE": { name: "Jeton Total Soin", description: "Ajoute 2.5% de chances à chaque tour de se soigner d’un problème de statut." },
     "ENEMY_ENDURE_CHANCE": { name: "Jeton Ténacité" },
     "ENEMY_FUSED_CHANCE": { name: "Jeton Fusion", description: "Ajoute 1% de chances qu’un Pokémon sauvage soit une fusion." },
   },
@@ -290,7 +291,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "TART_APPLE": "Pomme Acidulée",
     "STRAWBERRY_SWEET": "Fraise en Sucre",
     "UNREMARKABLE_TEACUP": "Bol Médiocre",
-  
+
     "CHIPPED_POT": "Théière Ébréchée",
     "BLACK_AUGURITE": "Obsidienne",
     "GALARICA_CUFF": "Bracelet Galanoa",
@@ -362,7 +363,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "HARD_METEORITE": "Méteorite Solide",
     "SMOOTH_METEORITE": "Méteorite Lisse",
     "ADAMANT_CRYSTAL": "Globe Adamant",
-    "LUSTROUS_ORB": "Orbe Perlé",
+    "LUSTROUS_GLOBE": "Globe Perlé",
     "GRISEOUS_CORE": "Globe Platiné",
     "REVEAL_GLASS": "Miroir Sacré",
     "GRACIDEA": "Gracidée",
@@ -381,7 +382,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "CORNERSTONE_MASK": "Masque de la Pierre",
     "SHOCK_DRIVE": "Module Choc",
     "BURN_DRIVE": "Module Pyro",
-    "CHILL_DRIVE": "Module Aqua",
-    "DOUSE_DRIVE": "Module Choc",
+    "CHILL_DRIVE": "Module Cryo",
+    "DOUSE_DRIVE": "Module Aqua",
   },
 } as const;

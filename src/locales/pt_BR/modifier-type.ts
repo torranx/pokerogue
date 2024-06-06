@@ -110,7 +110,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     },
     "TerastallizeModifierType": {
       name: "{{teraType}} Fragmento Tera",
-      description: "{{teraType}} Terastaliza um Pokémon por até 10 batalhas",
+      description: "{{teraType}} Terastalize um Pokémon por até 10 batalhas",
     },
     "ContactHeldItemTransferChanceModifierType": {
       description: "Quando atacar, tem {{chancePercent}}% de chance de roubar um item do oponente",
@@ -128,8 +128,8 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "RARE_CANDY": { name: "Doce Raro" },
     "RARER_CANDY": { name: "Doce Raríssimo" },
 
-    "MEGA_BRACELET": { name: "Mega Bracelete", description: "Mega Stones become available" },
-    "DYNAMAX_BAND": { name: "Bracelete  Dynamax", description: "Max Mushrooms become available" },
+    "MEGA_BRACELET": { name: "Mega Bracelete", description: "Mega Pedras ficam disponíveis" },
+    "DYNAMAX_BAND": { name: "Bracelete Dynamax", description: "Cogumáximos ficam disponíveis" },
     "TERA_ORB": { name: "Orbe Tera", description: "Fragmentos Tera ficam disponíveis" },
 
     "MAP": { name: "Mapa", description: "Permite escolher a próxima rota" },
@@ -139,10 +139,10 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "HYPER_POTION": { name: "Hiper Poção" },
     "MAX_POTION": { name: "Poção Máxima" },
     "FULL_RESTORE": { name: "Restaurador" },
-    
+
     "REVIVE": { name: "Reanimador" },
     "MAX_REVIVE": { name: "Reanimador Máximo" },
-    
+
     "FULL_HEAL": { name: "Cura Total" },
 
     "SACRED_ASH": { name: "Cinza Sagrada" },
@@ -187,18 +187,18 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "AMULET_COIN": { name: "Moeda Amuleto", description: "Aumenta a recompensa de dinheiro em 50%" },
     "GOLDEN_PUNCH": { name: "Soco Dourado", description: "Concede 50% do dano causado em dinheiro" },
     "COIN_CASE": { name: "Moedeira", description: "Após cada 10ª batalha, recebe 10% de seu dinheiro em juros" },
-    
+
     "LOCK_CAPSULE": { name: "Cápsula de Travamento", description: "Permite que você trave raridades de itens ao rolar novamente" },
 
     "GRIP_CLAW": { name: "Garra-Aperto" },
     "WIDE_LENS": { name: "Lente Ampla" },
-    
+
     "MULTI_LENS": { name: "Multi Lentes" },
 
     "HEALING_CHARM": { name: "Amuleto de Cura", description: "Aumenta a eficácia dos movimentos e itens que restauram PS em 10% (exceto Reanimador)" },
     "CANDY_JAR": { name: "Pote de Doces", description: "Aumenta o número de níveis adicionados pelo Doce Raro em 1" },
 
-    "BERRY_POUCH": { name: "Bolsa de Berries", description: "Adiciona uma chance de 25% de que uma berry usada não seja consumida" },
+    "BERRY_POUCH": { name: "Bolsa de Berries", description: "Adiciona uma chance de 30% de que uma berry usada não seja consumida" },
 
     "FOCUS_BAND": { name: "Bandana", description: "Adiciona uma chance de 10% de sobreviver com 1 PS após ser danificado o suficiente para desmaiar" },
 
@@ -208,6 +208,9 @@ export const modifierType: ModifierTypeTranslationEntries = {
 
     "LEFTOVERS": { name: "Sobras", description: "Cura 1/16 dos PS máximos de um Pokémon a cada turno" },
     "SHELL_BELL": { name: "Concha-Sino", description: "Cura 1/8 do dano causado por um Pokémon" },
+
+    "TOXIC_ORB": { name: "Esfera Tóxica", description: "Uma esfera estranha que exala toxinas quando tocada e envenena seriamente quem a segurar" },
+    "FLAME_ORB": { name: "Esfera da Chama", description: "Uma esfera estranha que aquece quando tocada e queima quem a segurar" },
 
     "BATON": { name: "Bastão", description: "Permite passar mudanças de atributo ao trocar Pokémon, ignorando armadilhas" },
 
@@ -227,10 +230,8 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "ENEMY_HEAL": { name: "Token de Recuperação", description: "Cura 2% dos PS máximos a cada turno" },
     "ENEMY_ATTACK_POISON_CHANCE": { name: "Token de Veneno" },
     "ENEMY_ATTACK_PARALYZE_CHANCE": { name: "Token de Paralisia" },
-    "ENEMY_ATTACK_SLEEP_CHANCE": { name: "Token de Sono" },
-    "ENEMY_ATTACK_FREEZE_CHANCE": { name: "Token de Congelamento" },
     "ENEMY_ATTACK_BURN_CHANCE": { name: "Token de Queimadura" },
-    "ENEMY_STATUS_EFFECT_HEAL_CHANCE": { name: "Token de Cura Total", description: "Adiciona uma chance de 10% a cada turno de curar uma condição de status" },
+    "ENEMY_STATUS_EFFECT_HEAL_CHANCE": { name: "Token de Cura Total", description: "Adiciona uma chance de 2.5% a cada turno de curar uma condição de status" },
     "ENEMY_ENDURE_CHANCE": { name: "Token de Persistência" },
     "ENEMY_FUSED_CHANCE": { name: "Token de Fusão", description: "Adiciona uma chance de 1% de que um Pokémon selvagem seja uma fusão" },
   },
@@ -290,7 +291,7 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "TART_APPLE": "Maçã Azeda",
     "STRAWBERRY_SWEET": "Doce de Morango",
     "UNREMARKABLE_TEACUP": "Xícara Comum",
-  
+
     "CHIPPED_POT": "Pote Lascado",
     "BLACK_AUGURITE": "Mineral Negro",
     "GALARICA_CUFF": "Bracelete de Galar",
@@ -362,11 +363,11 @@ export const modifierType: ModifierTypeTranslationEntries = {
     "HARD_METEORITE": "Meteorito Duro",
     "SMOOTH_METEORITE": " Meteorito Liso",
     "ADAMANT_CRYSTAL": "Cristal Adamante",
-    "LUSTROUS_ORB": "Orbe Pérola",
+    "LUSTROUS_GLOBE": "Globo Brilhante",
     "GRISEOUS_CORE": "Núcleo Platinado",
     "REVEAL_GLASS": "Espelho da Verdade",
     "GRACIDEA": "Gracídea",
-    "MAX_MUSHROOMS": "Cogumax",
+    "MAX_MUSHROOMS": "Cogumáximo",
     "DARK_STONE": "Pedra das Trevas",
     "LIGHT_STONE": "Pedra da Luz",
     "PRISON_BOTTLE": "Garrafa Prisão",
