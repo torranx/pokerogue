@@ -1420,6 +1420,21 @@ export class PostAttackAbAttr extends AbAttr {
   }
 }
 
+export class PostAttackAddBattlerTag extends PostAttackAbAttr {
+  private tagType: BattlerTagType;
+
+  constructor(tagType: BattlerTagType) {
+    super(false);
+
+    this.tagType = tagType;
+  }
+
+  applyPostAttack(pokemon: Pokemon, passive: boolean, defender: Pokemon, move: Move, hitResult: HitResult, args: any[]): boolean | Promise<boolean> {
+    pokemon.addTag(this.tagType);
+    return false;
+  }
+}
+
 export class PostAttackStealHeldItemAbAttr extends PostAttackAbAttr {
   private condition: PokemonAttackCondition;
 
@@ -4786,7 +4801,7 @@ export function initAbilities() {
       .bypassFaint()
       .partial(),
     new Ability(Abilities.GORILLA_TACTICS, 8)
-      .unimplemented(),
+      .attr(PostAttackAddBattlerTag, BattlerTagType.GORILLA_TACTICS),
     new Ability(Abilities.NEUTRALIZING_GAS, 8)
       .attr(SuppressFieldAbilitiesAbAttr)
       .attr(UncopiableAbilityAbAttr)

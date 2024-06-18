@@ -1449,6 +1449,34 @@ export class IceFaceTag extends BattlerTag {
   }
 }
 
+export class GorillaTacticsTag extends BattlerTag {
+  public moveId: Moves;
+
+  constructor(sourceMove: Moves) {
+    super(BattlerTagType.GORILLA_TACTICS, BattlerTagLapseType.CUSTOM, 1, sourceMove);
+  }
+
+  /**
+  * When given a battler tag or json representing one, load the data for it.
+  * @param {BattlerTag | any} source A battler tag
+  */
+  loadTag(source: BattlerTag | any): void {
+    super.loadTag(source);
+    this.moveId = source.moveId as Moves;
+  }
+
+  onAdd(pokemon: Pokemon): void {
+    super.onAdd(pokemon);
+
+    const lastMove = pokemon.getLastXMoves(1)[0];
+    this.moveId = lastMove?.move;
+  }
+
+  onRemove(pokemon: Pokemon): void {
+    super.onRemove(pokemon);
+  }
+}
+
 export function getBattlerTag(tagType: BattlerTagType, turnCount: integer, sourceMove: Moves, sourceId: integer): BattlerTag {
   switch (tagType) {
   case BattlerTagType.RECHARGING:
@@ -1566,6 +1594,8 @@ export function getBattlerTag(tagType: BattlerTagType, turnCount: integer, sourc
     return new DestinyBondTag(sourceMove, sourceId);
   case BattlerTagType.ICE_FACE:
     return new IceFaceTag(sourceMove);
+  case BattlerTagType.GORILLA_TACTICS:
+    return new GorillaTacticsTag(sourceMove);
   case BattlerTagType.NONE:
   default:
     return new BattlerTag(tagType, BattlerTagLapseType.CUSTOM, turnCount, sourceMove, sourceId);

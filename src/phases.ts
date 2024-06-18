@@ -19,7 +19,7 @@ import { biomeLinks, getBiomeName } from "./data/biomes";
 import { ModifierTier } from "./modifier/modifier-tier";
 import { FusePokemonModifierType, ModifierPoolType, ModifierType, ModifierTypeFunc, ModifierTypeOption, PokemonModifierType, PokemonMoveModifierType, PokemonPpRestoreModifierType, PokemonPpUpModifierType, RememberMoveModifierType, TmModifierType, getDailyRunStarterModifiers, getEnemyBuffModifierForWave, getModifierType, getPlayerModifierTypeOptions, getPlayerShopModifierTypeOptionsForWave, modifierTypes, regenerateModifierPoolThresholds } from "./modifier/modifier-type";
 import SoundFade from "phaser3-rex-plugins/plugins/soundfade";
-import { BattlerTagLapseType, CenterOfAttentionTag, EncoreTag, HideSpriteTag as HiddenTag, ProtectedTag, TrappedTag } from "./data/battler-tags";
+import { BattlerTagLapseType, CenterOfAttentionTag, EncoreTag, GorillaTacticsTag, HideSpriteTag as HiddenTag, ProtectedTag, TrappedTag } from "./data/battler-tags";
 import { getPokemonMessage, getPokemonNameWithAffix } from "./messages";
 import { Starter } from "./ui/starter-select-ui-handler";
 import { Gender } from "./data/gender";
@@ -1949,12 +1949,17 @@ export class CommandPhase extends FieldPhase {
     switch (command) {
     case Command.FIGHT:
       let useStruggle = false;
+
+      const usableMoveIsDisabled = playerPokemon.summonData?.disabledMove === playerPokemon.getMoveset().find(m => m.isUsable)[0];
       if (cursor === -1 ||
           playerPokemon.trySelectMove(cursor, args[0] as boolean) ||
-          (useStruggle = cursor > -1 && !playerPokemon.getMoveset().filter(m => m.isUsable(playerPokemon)).length)) {
+          (useStruggle = cursor > -1 && !playerPokemon.getMoveset().filter(m => m.isUsable(playerPokemon)).length) ||
+          (useStruggle = usableMoveIsDisabled && !!playerPokemon.getTag(EncoreTag) || !!playerPokemon.getTag(GorillaTacticsTag))) {
         const moveId = !useStruggle ? cursor > -1 ? playerPokemon.getMoveset()[cursor].moveId : Moves.NONE : Moves.STRUGGLE;
         const turnCommand: TurnCommand = { command: Command.FIGHT, cursor: cursor, move: { move: moveId, targets: [], ignorePP: args[0] }, args: args };
         const moveTargets: MoveTargetSet = args.length < 3 ? getMoveTargets(playerPokemon, moveId) : args[2];
+        console.log("useStruggle", useStruggle);
+        console.log("moveTargets", moveTargets.targets);
         if (!moveId) {
           turnCommand.targets = [this.fieldIndex];
         }
@@ -2109,18 +2114,17 @@ export class CommandPhase extends FieldPhase {
     const pokemon = this.getPokemon();
 
     const encoreTag = pokemon.getTag(EncoreTag) as EncoreTag;
+    const gorillaTacticsTag = pokemon.getTag(GorillaTacticsTag) as GorillaTacticsTag;
 
-    if (!encoreTag) {
+    if (!encoreTag && !gorillaTacticsTag) {
       return false;
     }
 
-    const moveIndex = pokemon.getMoveset().findIndex(m => m.moveId === encoreTag.moveId);
+    const moveId = encoreTag ? encoreTag.moveId : gorillaTacticsTag.moveId;
+    const moveIndex = pokemon.getMoveset().findIndex(m => m.moveId === moveId);
+    const isUsableMoveDisabled = pokemon.summonData?.disabledMove === moveIndex;
 
-    if (moveIndex === -1 || !pokemon.getMoveset()[moveIndex].isUsable(pokemon)) {
-      return false;
-    }
-
-    this.handleCommand(Command.FIGHT, moveIndex, false);
+    this.handleCommand(Command.FIGHT, moveIndex, isUsableMoveDisabled);
 
     return true;
   }

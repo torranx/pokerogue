@@ -18,7 +18,7 @@ import { pokemonEvolutions, pokemonPrevolutions, SpeciesFormEvolution, SpeciesEv
 import { reverseCompatibleTms, tmSpecies, tmPoolTiers } from "../data/tms";
 import { DamagePhase, FaintPhase, LearnMovePhase, ObtainStatusEffectPhase, StatChangePhase, SwitchSummonPhase, ToggleDoublePositionPhase  } from "../phases";
 import { BattleStat } from "../data/battle-stat";
-import { BattlerTag, BattlerTagLapseType, EncoreTag, HelpingHandTag, HighestStatBoostTag, TypeBoostTag, TypeImmuneTag, getBattlerTag } from "../data/battler-tags";
+import { BattlerTag, BattlerTagLapseType, EncoreTag, GorillaTacticsTag, HelpingHandTag, HighestStatBoostTag, TypeBoostTag, TypeImmuneTag, getBattlerTag } from "../data/battler-tags";
 import { WeatherType } from "../data/weather";
 import { TempBattleStat } from "../data/temp-battle-stat";
 import { ArenaTagSide, WeakenMoveScreenTag, WeakenMoveTypeTag } from "../data/arena-tag";
@@ -3474,13 +3474,21 @@ export class EnemyPokemon extends Pokemon {
       if (movePool.length === 1) {
         return { move: movePool[0].moveId, targets: this.getNextTargets(movePool[0].moveId) };
       }
-      const encoreTag = this.getTag(EncoreTag) as EncoreTag;
-      if (encoreTag) {
-        const encoreMove = movePool.find(m => m.moveId === encoreTag.moveId);
-        if (encoreMove) {
-          return { move: encoreMove.moveId, targets: this.getNextTargets(encoreMove.moveId) };
+
+      const singleMoveTags = [
+        this.getTag(EncoreTag) as EncoreTag,
+        this.getTag(GorillaTacticsTag) as GorillaTacticsTag
+      ];
+
+      for (const tag of singleMoveTags) {
+        if (tag) {
+          const move = movePool.find(m => m.moveId === tag.moveId);
+          if (move) {
+            return { move: move.moveId, targets: this.getNextTargets(move.moveId) };
+          }
         }
       }
+
       switch (this.aiType) {
       case AiType.RANDOM:
         const moveId = movePool[this.scene.randBattleSeedInt(movePool.length)].moveId;
