@@ -3830,7 +3830,7 @@ export interface AttackMoveResult {
 export class PokemonSummonData {
   public battleStats: integer[] = [ 0, 0, 0, 0, 0, 0, 0 ];
   public moveQueue: QueuedMove[] = [];
-  public disabledMove: Moves = Moves.NONE;
+  public disabledMoves: Moves[] = [];
   public disabledTurns: integer = 0;
   public tags: BattlerTag[] = [];
   public abilitySuppressed: boolean = false;
@@ -3930,7 +3930,7 @@ export class PokemonMove {
   }
 
   isUsable(pokemon: Pokemon, ignorePp?: boolean): boolean {
-    if (this.moveId && pokemon.summonData?.disabledMove === this.moveId) {
+    if (this.moveId && pokemon.summonData.disabledMoves.includes(this.moveId)) {
       return false;
     }
     return (ignorePp || this.ppUsed < this.getMovePp() || this.getMove().pp === -1) && !this.getMove().name.endsWith(" (N)");

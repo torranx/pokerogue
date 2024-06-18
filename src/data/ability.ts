@@ -998,12 +998,12 @@ export class PostDefendMoveDisableAbAttr extends PostDefendAbAttr {
   }
 
   applyPostDefend(pokemon: Pokemon, passive: boolean, attacker: Pokemon, move: Move, hitResult: HitResult, args: any[]): boolean {
-    if (!attacker.summonData.disabledMove) {
+    if (!attacker.summonData.disabledMoves.length) {
       if (move.checkFlag(MoveFlags.MAKES_CONTACT, attacker, pokemon) && (this.chance === -1 || pokemon.randSeedInt(100) < this.chance) && !attacker.isMax()) {
         this.attacker = attacker;
         this.move = move;
 
-        attacker.summonData.disabledMove = move.id;
+        attacker.summonData.disabledMoves.push(move.id);
         attacker.summonData.disabledTurns = 4;
         return true;
       }
@@ -1401,6 +1401,22 @@ export class PostAttackStealHeldItemAbAttr extends PostAttackAbAttr {
   getTargetHeldItems(target: Pokemon): PokemonHeldItemModifier[] {
     return target.scene.findModifiers(m => m instanceof PokemonHeldItemModifier
       && (m as PokemonHeldItemModifier).pokemonId === target.id, target.isPlayer()) as PokemonHeldItemModifier[];
+  }
+}
+
+export class PostAttackDisableMovesAbAttr extends PostAttackAbAttr {
+  applyPostAttack(pokemon: Pokemon, passive: boolean, defender: Pokemon, move: Move, hitResult: HitResult, args: any[]): boolean | Promise<boolean> {
+    // if (pokemon.summonData) {
+    //   const disabledMoves = [];
+    //   for (const pokemonMove of pokemon.getMoveset()) {
+    //     if (move.id !== pokemonMove.getMove().id) {
+    //       disabledMoves.push(pokemonMove.getMove().id)
+    //     }
+    //   }
+    //   pokemon.summonData.disabledMoves = disabledMoves;
+    //   console.log(pokemon.summonData.disabledMoves)
+    // }
+    return false;
   }
 }
 
@@ -4699,7 +4715,8 @@ export function initAbilities() {
       .bypassFaint()
       .partial(),
     new Ability(Abilities.GORILLA_TACTICS, 8)
-      .unimplemented(),
+      .attr(BattleStatMultiplierAbAttr, BattleStat.ATK, 1.5)
+      .attr(PostAttackDisableMovesAbAttr),
     new Ability(Abilities.NEUTRALIZING_GAS, 8)
       .attr(SuppressFieldAbilitiesAbAttr)
       .attr(UncopiableAbilityAbAttr)
