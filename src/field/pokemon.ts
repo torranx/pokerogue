@@ -3471,15 +3471,18 @@ export class EnemyPokemon extends Pokemon {
 
     const movePool = this.getMoveset().filter(m => m.isUsable(this));
     if (movePool.length) {
+      const encoreTag = this.getTag(EncoreTag) as EncoreTag;
+      const encoreMove = this.getMoveset().find(m => m.moveId === encoreTag?.moveId);
+      const isEncoredAndDisabled = !!encoreTag && encoreMove.moveId === this.summonData?.disabledMove;
+
+      if (isEncoredAndDisabled) {
+        return { move: Moves.STRUGGLE, targets: this.getNextTargets(Moves.STRUGGLE) };
+      }
       if (movePool.length === 1) {
         return { move: movePool[0].moveId, targets: this.getNextTargets(movePool[0].moveId) };
       }
-      const encoreTag = this.getTag(EncoreTag) as EncoreTag;
-      if (encoreTag) {
-        const encoreMove = movePool.find(m => m.moveId === encoreTag.moveId);
-        if (encoreMove) {
-          return { move: encoreMove.moveId, targets: this.getNextTargets(encoreMove.moveId) };
-        }
+      if (encoreTag && encoreMove.moveId !== this.summonData?.disabledMove) {
+        return { move: encoreMove.moveId, targets: this.getNextTargets(encoreMove.moveId) };
       }
       switch (this.aiType) {
       case AiType.RANDOM:

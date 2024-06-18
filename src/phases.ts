@@ -1948,13 +1948,15 @@ export class CommandPhase extends FieldPhase {
 
     switch (command) {
     case Command.FIGHT:
-      let useStruggle = false;
-      if (cursor === -1 ||
-          playerPokemon.trySelectMove(cursor, args[0] as boolean) ||
-          (useStruggle = cursor > -1 && !playerPokemon.getMoveset().filter(m => m.isUsable(playerPokemon)).length)) {
+      const usableMoveIsDisabled = playerPokemon.summonData?.disabledMove === playerPokemon.getMoveset().find(m => m.isUsable)[0];
+      const useStruggle = cursor > -1 && !playerPokemon.getMoveset().filter(m => m.isUsable(playerPokemon)).length || usableMoveIsDisabled;
+
+      console.log(usableMoveIsDisabled);
+      if (cursor === -1 || playerPokemon.trySelectMove(cursor, args[0] as boolean) || useStruggle) {
         const moveId = !useStruggle ? cursor > -1 ? playerPokemon.getMoveset()[cursor].moveId : Moves.NONE : Moves.STRUGGLE;
         const turnCommand: TurnCommand = { command: Command.FIGHT, cursor: cursor, move: { move: moveId, targets: [], ignorePP: args[0] }, args: args };
         const moveTargets: MoveTargetSet = args.length < 3 ? getMoveTargets(playerPokemon, moveId) : args[2];
+
         if (!moveId) {
           turnCommand.targets = [this.fieldIndex];
         }
