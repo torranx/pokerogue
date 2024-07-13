@@ -105,7 +105,8 @@ export const SettingKeys = {
   SE_Volume: "SE_VOLUME",
   Music_Preference: "MUSIC_PREFERENCE",
   Show_BGM_Bar: "SHOW_BGM_BAR",
-  Shop_Overlay_Opacity: "SHOP_OVERLAY_OPACITY"
+  Shop_Overlay_Opacity: "SHOP_OVERLAY_OPACITY",
+  Cursor_Style: "CURSOR_STYLE"
 };
 
 /**
@@ -550,6 +551,23 @@ export const Setting: Array<Setting> = [
     type: SettingType.DISPLAY,
     requireReload: false
   },
+  {
+    key: SettingKeys.Cursor_Style,
+    label: "Cursor Style",
+    options: [
+      {
+        value: "Default",
+        label: "PokéRogue"
+      },
+      {
+        value: "System",
+        label: i18next.t("settings:system")
+      }
+    ],
+    default: 0,
+    type: SettingType.DISPLAY,
+    requireReload: false
+  }
 ];
 
 /**
@@ -776,6 +794,10 @@ export function setSetting(scene: BattleScene, setting: string, value: integer):
     break;
   case SettingKeys.Shop_Overlay_Opacity:
     scene.updateShopOverlayOpacity(parseInt(Setting[index].options[value].value) * .01);
+    break;
+  case SettingKeys.Cursor_Style:
+    const isDefault = (Setting[index].options[value].value === "Default");
+    document.body.style.cursor = isDefault ? "url('/images/ui/pokerogue_cursor.png'), auto" : "auto";
     break;
   }
 

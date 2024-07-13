@@ -20,7 +20,6 @@ html {
 body {
   margin: 0;
   background: #484050;
-  cursor: url('./public/images/pokerouge_cursor.png'), auto;
 }
 
 #app {
