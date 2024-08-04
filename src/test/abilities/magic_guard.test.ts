@@ -12,6 +12,7 @@ import { Abilities } from "#enums/abilities";
 import { WeatherType } from "#app/data/weather.js";
 import { StatusEffect, getStatusEffectCatchRateMultiplier } from "#app/data/status-effect";
 import { BattlerTagType } from "#enums/battler-tag-type";
+import { GulpMissileTag } from "#app/data/battler-tags";
 
 const TIMEOUT = 20 * 1000; // 20 sec timeout
 
@@ -504,6 +505,48 @@ describe("Abilities - Magic Guard", () => {
     * - The player Pokemon (with Magic Guard) should not lose HP due to this ability attribute
     */
     expect(leadPokemon.hp).toBe(leadPokemon.getMaxHp());
+  }, TIMEOUT
+  );
+
+  it("Magic Guard prevents indirect HP loss from Gulp Missile", async() => {
+    //Tests the ability Gulp Missile
+    game.override.moveset([Moves.SURF, Moves.SPLASH]);
+    game.override.enemyMoveset([Moves.QUICK_ATTACK, Moves.QUICK_ATTACK, Moves.QUICK_ATTACK, Moves.QUICK_ATTACK]);
+    vi.spyOn(overrides, "ABILITY_OVERRIDE", "get").mockReturnValue(Abilities.GULP_MISSILE);
+    vi.spyOn(overrides, "OPP_ABILITY_OVERRIDE", "get").mockReturnValue(Abilities.MAGIC_GUARD);
+
+    await game.startBattle([Species.CRAMORANT]);
+
+    const leadPokemon = game.scene.getPlayerPokemon();
+    expect(leadPokemon).toBeDefined();
+
+    const enemyPokemon = game.scene.getEnemyPokemon();
+    expect(enemyPokemon).toBeDefined();
+
+    game.doAttack(getMovePosition(game.scene, 0, Moves.SURF));
+    await game.phaseInterceptor.to(TurnEndPhase);
+
+    //Enemy Pokemon's HP after Surf
+    const gulpMissileTagType = (leadPokemon.getTag(GulpMissileTag)).tagType;
+    //Retrieves Gulp Missile's TagType
+    const hpTestValue = enemyPokemon.hp;
+
+    game.doAttack(getMovePosition(game.scene, 0, Moves.SPLASH));
+    await game.phaseInterceptor.to(TurnEndPhase);
+
+    /**
+    * Expect:
+    * - The player Pokemon (with Magic Guard) should not lose HP due to this ability attribute
+    * - Other non-damaging effects still apply.
+    * - BattlerTagType.GULP_MISSLE_ARROKUDA --> BattleStat.DEF -1
+    * - BattlerTagType.GULP_MISSLE_PIKACHU --> Paralysis
+    */
+    expect(enemyPokemon.hp).toBe(hpTestValue);
+    if (gulpMissileTagType === BattlerTagType.GULP_MISSLE_ARROKUDA) {
+      expect(enemyPokemon.summonData.battleStats[BattleStat.DEF]).toBe(-1);
+    } else if (gulpMissileTagType === BattlerTagType.GULP_MISSLE_PIKACHU) {
+      expect(enemyPokemon.status).toBe(StatusEffect.PARALYSIS);
+    }
   }, TIMEOUT
   );
 });
